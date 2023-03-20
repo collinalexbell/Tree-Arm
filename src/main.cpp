@@ -9,6 +9,7 @@
 
 #include "Arduino.h"
 #include <Servo.h>
+#include "BorgServo.h"
 
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 13
