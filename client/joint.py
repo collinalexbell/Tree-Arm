@@ -8,4 +8,4 @@ class Joint:
         count += 1
 
     def id(self):
-        return self.id
+        return self._id

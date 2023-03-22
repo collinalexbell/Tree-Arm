@@ -3,12 +3,14 @@ from curses import wrapper
 import commands
 from joint import Joint
 import curses
+import time
+import json
 
 def four_arm_control(stdscr):
     curses.start_color()
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_RED)
     stdscr.clear()
-    stdscr.addstr(0,12,"Tree Arm 4 Motor Control")
+    stdscr.addstr(0,12,"Eden Arm 4 Motor Control")
     stdscr.refresh()
     main_arm_win = curses.newwin(10,40,2,0)
     main_arm_win.addstr(0,0,"Main Arm")
@@ -33,13 +35,10 @@ def four_arm_control(stdscr):
 
 def main(stdscr):
     main_arm = Joint()
-    command = commands.move_joint_to_pos(main_arm, 150, 1)
-    coms = Coms("/dev/ttyUSB0")
-    stdscr.clear()
-    stdscr.addstr(0, 0, "Tree Arm v1i1")
-
-    stdscr.refresh()
-    stdscr.getkey()
+    command = commands.joint_status(main_arm)
+    coms = Coms("/dev/ttyACM0")
+    time.sleep(1)
+    coms.write(command)
     four_arm_control(stdscr)
 
 curses.wrapper(main)

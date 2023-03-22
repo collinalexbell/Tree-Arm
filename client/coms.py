@@ -6,4 +6,5 @@ class Coms:
 	    self.serial = Serial(port)
 
     def write(self, obj):
-        self.serial.write(json.dumps(obj))
+        payload = json.dumps(obj)
+        self.serial.write(payload.encode())
